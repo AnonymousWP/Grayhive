@@ -1,0 +1,85 @@
+# Image versions of the containers have to be manually edited once a new version is available
+
+version: '3.7'
+services:
+
+  # MongoDB: https://hub.docker.com/_/mongo/
+  mongo:
+    image: mongo:4.4.12
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - graylog
+    restart: always
+
+  elasticsearch: # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/7.10/docker.html
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+
+     # Stores ElasticSearch data in this directory/path. Comes in handy when updating ElasticSearch, so that data is retained.
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the initial memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM). "m" and "g" obviously stand for MB and GB.
+      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true" # Mitigates vulnerabilities related to Log4j
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - graylog
+    restart: always
+
+  graylog:   # Graylog: https://hub.docker.com/r/graylog/graylog/
+    image: graylog/graylog:4.2.6
+    volumes:
+      - graylog_data:/usr/share/graylog/data # Stores Graylog data in this directory/path. Comes in handy when updating Graylog, so that data is retained.
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=EnterSaltHere # For salting the actual password It's recommended that the secret is at least 96 characters long. See here for more information: https://github.com/Graylog2/graylog-docker#configuration
+
+      - GRAYLOG_ROOT_PASSWORD_SHA2=EnterSHA2HashOfYourPasswordHere # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
+
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://EnterURIHere:9000/ # You can change the IP-address to 127.0.0.1 if you want to run it locally, and any external IP-address if you want to run it on a server.
+
+    # Sets the correct timezone within Graylog
+      - TZ=Europe/Amsterdam
+      - GRAYLOG_TIMEZONE=Europe/Amsterdam
+      - GRAYLOG_ROOT_TIMEZONE=Europe/Amsterdam
+    entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
+    networks:
+      - graylog
+
+    # Links MongoDB with ElasticSearch.
+    links:
+      - mongo:mongodb
+      - elasticsearch
+    restart: always
+
+    #Doesn't work without MongoDB and ElasticSearch.
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      - 5044:5044/udp       # Beats UDP
+      - 5044:5044/tcp       # Beats TCP
+      - 9000:9000           # Graylog web interface and REST API
+      - 1514:1514           # Syslog TCP
+      - 1514:1514/udp       # Syslog UDP
+      - 12201:12201         # GELF TCP
+      - 12201:12201/udp     # GELF UDP
+      - 5555:5555/tcp       # Raw/Plaintext TCP input
+      - 5555:5555/udp       # Raw/Plaintext UDP input
+networks:
+    graylog:
+      driver: bridge
+
+# Volumes for persisting data, see https://docs.docker.com/engine/admin/volumes/volumes/
+volumes:
+  mongo_data:
+    driver: local
+  es_data:
+    driver: local
+  graylog_data:
+    driver: local
