@@ -101,6 +101,12 @@ In this repository we already have created a `docker-compose.yml`. See <https://
 1. Verify you have Docker Compose installed
 
     ```shell
+    sudo docker-compose -v
+    ```
+
+1. If you don't have Docker Compose installed, install it
+
+    ```shell
     sudo apt install docker-compose -y
     ```
 
