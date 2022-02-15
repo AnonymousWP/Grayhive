@@ -104,7 +104,7 @@ In this repository we already have created a `docker-compose.yml`. See <https://
     sudo apt install docker-compose -y
     ```
 
-- Execute the following to start the containers in the background
+1. Execute the following to start the containers in the background
 
     ```shell
     sudo docker-compose up -d
