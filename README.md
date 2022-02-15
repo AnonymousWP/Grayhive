@@ -2,8 +2,6 @@
 
 A Proof-of-Concept repository for automating Graylog and connecting it with The Hive. **NOTE:** Some Terraform modules, the Docker Compose file, Python script and this README contain empty strings/values, so make sure to fill them in correctly, according to your own situation/environment. Besides: this repository was initially a Proof-of-Concept, so some features (such as sending an alert to The Hive) is done in a basic way to show its purpose/goal. Feel free to create a PR to improve this.
 
-[[_TOC_]]
-
 ## Stacks
 
 This repository makes use of a single Terraform stack, namely:
