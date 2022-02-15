@@ -152,6 +152,8 @@ docker-compose.yml file is located!_
 
 ## The Hive
 
+The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSec/graylog2thehive). They have also written [a blog](https://blog.reconinfosec.com/integrating-graylog-with-thehive/) about it. Credits to them for making these scripts.
+
 **NOTE:** following/executing the next steps assume that the script is already on the server. It's also recommended to execute the steps as sudo'er.
 
 1. It's important that the server can only send alerts via port 5000; not receive. Thus we'll block/drop incoming traffic on port 5000.
