@@ -65,12 +65,8 @@ services:
       - 5044:5044/udp       # Beats UDP
       - 5044:5044/tcp       # Beats TCP
       - 9000:9000           # Graylog web interface and REST API
-      - 1514:1514           # Syslog TCP
       - 1514:1514/udp       # Syslog UDP
-      - 12201:12201         # GELF TCP
-      - 12201:12201/udp     # GELF UDP
       - 5555:5555/tcp       # Raw/Plaintext TCP input
-      - 5555:5555/udp       # Raw/Plaintext UDP input
 networks:
     graylog:
       driver: bridge
