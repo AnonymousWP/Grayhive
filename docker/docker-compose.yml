@@ -5,7 +5,7 @@ services:
 
   # MongoDB: https://hub.docker.com/_/mongo/
   mongo:
-    image: mongo:4.4.12
+    image: mongo:4.4.13
     volumes:
       - mongo_data:/data/db
     networks:
