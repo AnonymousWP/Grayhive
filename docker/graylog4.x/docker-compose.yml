@@ -23,7 +23,6 @@ services:
       - transport.host=localhost
       - network.host=0.0.0.0
       - "ES_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the initial memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM). "m" and "g" obviously stand for MB and GB.
-      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true" # Mitigates vulnerabilities related to Log4j
     ulimits:
       memlock:
         soft: -1
