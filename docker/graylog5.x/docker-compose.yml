@@ -1,79 +1,60 @@
 # Image versions of the containers have to be manually edited once a new version is available
 
-version: '3.7'
-services:
+version: "3.8"
 
-  mongo:
-    image: mongo:6.0.3
+services:
+  mongodb:
+    image: "mongo:6.0.3"
     volumes:
-      - mongo_data:/data/db
-    networks:
-      - graylog
-    restart: always
+      - "mongodb_data:/data/db"
+    restart: "on-failure"
 
   opensearch:
-    image: opensearchproject/opensearch:2.4.0
-
-     # Stores OpenSearch data in this directory/path. Comes in handy when updating OpenSearch, so that data is retained.
-    volumes:
-      - es_data:/usr/share/opensearch/data
+    image: "opensearchproject/opensearch:2.4.0"
+    volumes: # Stores OpenSearch data in this directory/path. Comes in handy when updating OpenSearch, so that data is retained.
+      - os_data:/usr/share/opensearch/data
     environment:
-      - http.host=0.0.0.0
-      - transport.host=localhost
-      - network.host=0.0.0.0
-      - "ES_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the initial memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM). "m" and "g" obviously stand for MB and GB.
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the initial memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM). "m" and "g" obviously stand for MB and GB.
+      - "discovery.type=single-node"
+      - "logger.deprecation.level=warn"
+      - "action.auto_create_index=false"
+      - "plugins.security.ssl.http.enabled=false"
+      - "plugins.security.disabled=true"
     ulimits:
       memlock:
-        soft: -1
         hard: -1
-    networks:
-      - graylog
-    restart: always
+        soft: -1
+    restart: "on-failure"
 
   graylog:
-    image: graylog/graylog:5.0.0
-    volumes:
-      - graylog_data:/usr/share/graylog/data # Stores Graylog data in this directory/path. Comes in handy when updating Graylog, so that data is retained.
-    environment:
-      - GRAYLOG_PASSWORD_SECRET=EnterSaltHere # For salting the actual password. It's recommended that the secret is at least 64 characters long. See here for more information: https://github.com/Graylog2/graylog-docker#configuration
-
-      - GRAYLOG_ROOT_PASSWORD_SHA2=EnterSHA2HashOfYourPasswordHere # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
-
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://EnterURIHere:9000/ # You can change the IP-address to 127.0.0.1 if you want to run it locally, and any external IP-address if you want to run it on a server.
-
-    # Sets the correct timezone within Graylog
-      - TZ=Europe/Amsterdam
-      - GRAYLOG_TIMEZONE=Europe/Amsterdam
-      - GRAYLOG_ROOT_TIMEZONE=Europe/Amsterdam
-    entrypoint: /usr/bin/tini -- wait-for-it opensearch:9200 --  /docker-entrypoint.sh
-    networks:
-      - graylog
-
-    # Links MongoDB with OpenSearch.
-    links:
-      - mongo:mongodb
-      - opensearch
-    restart: always
-
-    #Doesn't work without MongoDB and OpenSearch.
+    image: "graylog/graylog:5.0.0"
     depends_on:
-      - mongo
-      - opensearch
+      opensearch:
+        condition: "service_started"
+      mongodb:
+        condition: "service_started"
+    entrypoint: "/usr/bin/tini -- wait-for-it opensearch:9200 --  /docker-entrypoint.sh"
+    environment:
+      GRAYLOG_NODE_ID_FILE: "/usr/share/graylog/data/config/node-id"
+      GRAYLOG_PASSWORD_SECRET: "<your-password>" # You can generate a password using `pwgen -N 1 -s 96`
+      GRAYLOG_ROOT_PASSWORD_SHA2: "<hash-of-the-above-password>" # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
+      GRAYLOG_HTTP_BIND_ADDRESS: "0.0.0.0:9000"
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://your-ip:9000/" # You can change the IP-address to 127.0.0.1 if you want to run it locally, and any external IP-address if you want to run it on a server.
+      GRAYLOG_ELASTICSEARCH_HOSTS: "http://opensearch:9200"
+      GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
     ports:
-      - 5044:5044/udp       # Beats UDP
-      - 5044:5044/tcp       # Beats TCP
-      - 9000:9000           # Graylog web interface and REST API
-      - 1514:1514/udp       # Syslog UDP
-      - 5555:5555/tcp       # Raw/Plaintext TCP input
-networks:
-    graylog:
-      driver: bridge
-
-# Volumes for persisting data, see https://docs.docker.com/engine/admin/volumes/volumes/
+    - "5044:5044/tcp"   # Beats
+    - "5140:5140/udp"   # Syslog
+    - "5140:5140/tcp"   # Syslog
+    - "5555:5555/tcp"   # RAW TCP
+    - "5555:5555/udp"   # RAW UDP
+    - "9000:9000/tcp"   # Server API
+    volumes: # Stores Graylog data in this directory/path. Comes in handy when updating Graylog, so that data is retained.
+      - "graylog_data:/usr/share/graylog/data/data"
+      - "graylog_journal:/usr/share/graylog/data/journal"
+    restart: "on-failure"
 volumes:
-  mongo_data:
-    driver: local
-  es_data:
-    driver: local
+  mongodb_data:
+  os_data:
   graylog_data:
-    driver: local
+  graylog_journal:
