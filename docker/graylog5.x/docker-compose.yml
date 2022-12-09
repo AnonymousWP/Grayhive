@@ -14,7 +14,7 @@ services:
     volumes: # Stores OpenSearch data in this directory/path. Comes in handy when updating OpenSearch, so that data is retained.
       - os_data:/usr/share/opensearch/data
     environment:
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the initial memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM). "m" and "g" obviously stand for MB and GB.
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx1g" # `Xms` specifies the minimum memory allocation pool. `Xmx` specifies the maximum allocation pool for the Java Virtual Machine (JVM).
       - "discovery.type=single-node"
       - "logger.deprecation.level=warn"
       - "action.auto_create_index=false"
