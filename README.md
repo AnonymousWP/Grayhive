@@ -17,7 +17,7 @@ However, you can apply modules to your own liking instead of having to apply the
 
 ## Used VM configuration
 
-We're making use of an Ubuntu Minimal 20.04 instance running on a hypervisor.
+We're making use of an Ubuntu Minimal 22.04 instance running on a hypervisor.
 
 | Resources | Values |
 | ------ | ------ |
@@ -84,7 +84,7 @@ We're making use of an Ubuntu Minimal 20.04 instance running on a hypervisor.
 
     ```shell
     PermitRootLogin no
-    AllowUsers     test-user # The tab is crucial here
+    AllowUsers  test-user
     ```
 
     Restart the service so that the changes take effect
@@ -111,9 +111,7 @@ In this repository we already have created a `docker-compose.yml`. See <https://
 
 1. If you don't have Docker Compose installed, install it
 
-    ```shell
-    sudo apt install docker-compose -y
-    ```
+    <https://docs.docker.com/compose/install/>
 
 1. Execute the following to start the containers in the background
 
@@ -121,8 +119,8 @@ In this repository we already have created a `docker-compose.yml`. See <https://
     sudo docker-compose up -d
     ```
 
-_N.B. Execute this command in the directory where the
-docker-compose.yml file is located!_
+    _N.B. Execute this command in the directory where the
+    docker-compose.yml file is located!_
 
 1. Create input to test if log messages are received
 
