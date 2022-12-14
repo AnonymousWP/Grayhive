@@ -19,14 +19,14 @@ resource "graylog_event_definition" "firewall" {
     execute_every_ms = 60000
     group_by         = []
     series           = []
-    conditions       = {
-      expression    = null
+    conditions = {
+      expression = null
     }
   })
 
   field_spec = null
 
-  key_spec   = null
+  key_spec = null
 
   # For creating a webhook with notifications being sent to Slack, see: https://api.slack.com/messaging/webhooks
 
@@ -60,8 +60,8 @@ resource "graylog_event_definition" "ip_address" {
     execute_every_ms = 60000
     group_by         = []
     series           = []
-    conditions       = {
-      expression    = null
+    conditions = {
+      expression = null
     }
   })
 

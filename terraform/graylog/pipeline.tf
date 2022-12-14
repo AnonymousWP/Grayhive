@@ -7,5 +7,5 @@ resource "graylog_pipeline" "internalip" {
 
 resource "graylog_pipeline" "normalisation" {
   source      = var.normalise_firewall
-  description = "Normalises events from the firewall"  
+  description = "Normalises events from the firewall"
 }

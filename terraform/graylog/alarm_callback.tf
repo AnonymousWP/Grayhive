@@ -41,13 +41,13 @@ resource "graylog_event_notification" "slackip" {
 }
 
 resource "graylog_event_notification" "thehive" {
-  count = (var.enable_the_hive ? 1 : 0)
+  count       = (var.enable_the_hive ? 1 : 0)
   description = "Sends notification to The Hive"
   title       = "The Hive"
-  config      = jsonencode(
+  config = jsonencode(
     {
-      type    = "http-notification-v1",
-      url     = var.the_hive_uri # You can change the value in `terraform.tfvars`
+      type = "http-notification-v1",
+      url  = var.the_hive_uri # You can change the value in `terraform.tfvars`
     }
   )
 }
