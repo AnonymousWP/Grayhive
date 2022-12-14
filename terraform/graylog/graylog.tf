@@ -1,15 +1,15 @@
 terraform {
   required_providers {
     graylog = {
-      source  = "terraform-provider-graylog/graylog"
-      version = "1.0.4"
+      source  = "zahiar/graylog"
+      version = "1.3.0"
     }
   }
 }
 
 provider "graylog" {
   web_endpoint_uri = ""
-  api_version      = "v3"
+  api_version      = "v5"
   auth_name        = var.authusername
   auth_password    = var.authpassword
 }
