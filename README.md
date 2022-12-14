@@ -223,9 +223,9 @@ This Proof-of-Concept uses the following Terraform provider: <https://registry.t
     cd terraform/graylog
     ```
 
-1. To make sure you'll push the correct configuration, check all values and attributes within the modules.
+1. To make sure you'll push the correct configuration, check all values and attributes within the modules, such as putting the `web_endpoint_uri` in [graylog.tf](/terraform/graylog/graylog.tf#L11)
 
-1. Here you have to install the provider, which you can do by the following
+1. In the same directory, you have to install the provider, which you can do by the following
 
     ```shell
     terraform init
