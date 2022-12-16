@@ -1,7 +1,7 @@
 # Creates two Pipelines gathered from two different Graylog Streams. Both Pipelines have a different purpose.
 
 resource "graylog_pipeline_connection" "internalip" {
-  stream_id    = data.graylog_stream.all_messages.id
+  stream_id    = data.graylog_stream.default_stream.id
   pipeline_ids = [graylog_pipeline.internalip.id]
 }
 

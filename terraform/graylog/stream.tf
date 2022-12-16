@@ -8,10 +8,18 @@ resource "graylog_stream" "firewall" {
   description   = "Firewall messages only"
 }
 
-data "graylog_stream" "all_messages" {
-  title = "All messages"
+data "graylog_stream" "default_stream" {
+  title = "Default Stream"
 }
 
 data "graylog_index_set" "default" {
   index_prefix = "graylog"
+}
+
+data "graylog_stream" "all_events" {
+  title = "All events"
+}
+
+data "graylog_stream" "all_system_events" {
+  title = "All system events"
 }
