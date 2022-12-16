@@ -27,7 +27,7 @@ services:
     restart: "on-failure"
 
   graylog:
-    image: "graylog/graylog:5.0.0"
+    image: "graylog/graylog:5.0.1"
     depends_on:
       opensearch:
         condition: "service_started"
