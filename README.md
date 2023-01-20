@@ -2,11 +2,6 @@
 
 A Proof-of-Concept repository for automating Graylog and connecting it with The Hive. **NOTE:** Some Terraform modules, the Docker Compose file, Python script and this README contain empty strings/values, so make sure to fill them in correctly, according to your own situation/environment. Besides: this repository was initially a Proof-of-Concept, so some features (such as sending an alert to The Hive) is done in a basic way to show its purpose/goal. Feel free to create a PR to improve this.
 
-Besides, remember that the [Terraform Graylog Provider](https://github.com/terraform-provider-graylog/terraform-provider-graylog#warning-this-project-was-eol) is [no longer maintained](https://github.com/terraform-provider-graylog/terraform-provider-graylog/pull/94#issuecomment-1027810270) by the original maintainer. This means that in a future update of Graylog, more functionality **may** not work anymore through Terraform. This means two things:
-
-- You'd have to fork the Terraform Graylog Provider and maintain the provider yourself
-- Don't upgrade Graylog (which may come with the risk of security vulnerabilities, for example)
-
 ## Stacks
 
 This repository makes use of a single Terraform stack, namely:
@@ -215,7 +210,7 @@ The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSe
 
 ## Terraform modules
 
-This Proof-of-Concept uses the following Terraform provider: <https://registry.terraform.io/providers/terraform-provider-graylog/graylog/latest/docs>. In order to execute all modules, do the following:
+This Proof-of-Concept uses the following Terraform provider: <https://registry.terraform.io/providers/zahiar/graylog/latest/docs>. In order to execute all modules, do the following:
 
 1. Switch to the corresponding directory to execute the first stack
 
