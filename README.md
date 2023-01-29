@@ -98,6 +98,8 @@ We're making use of an Ubuntu Minimal 22.04 instance running on a hypervisor.
 
 In this repository we already have created a `docker-compose.yml`. See <https://github.com/AnonymousWP/Grayhive/blob/master/docker/docker-compose.yml> in case you didn't create one yet.
 
+**NOTE**: don't forget to change the values in `docker-compose.yml` and its corresponding `.env` file. Click [here](docker\\graylog5.x\\.env) or [here](docker\\graylog4.x\\.env) for the `.env` file.
+
 1. Verify you have Docker Compose installed
 
     ```shell
@@ -114,7 +116,7 @@ In this repository we already have created a `docker-compose.yml`. See <https://
     sudo docker-compose up -d
     ```
 
-    _N.B. Execute this command in the directory where the
+    Note: execute this command in the directory where the
     docker-compose.yml file is located!_
 
 1. Create input to test if log messages are received
