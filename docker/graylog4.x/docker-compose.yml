@@ -36,9 +36,9 @@ services:
     volumes:
       - graylog_data:/usr/share/graylog/data # Stores Graylog data in this directory/path. Comes in handy when updating Graylog, so that data is retained.
     environment:
-      - GRAYLOG_PASSWORD_SECRET=EnterSaltHere # You can generate a password using `pwgen -N 1 -s 96`
+      - GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET} # You can generate a password using `pwgen -N 1 -s 96`
 
-      - GRAYLOG_ROOT_PASSWORD_SHA2=EnterSHA2HashOfYourPasswordHere # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
+      - GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_ROOT_PASSWORD_SHA2} # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
 
       - GRAYLOG_HTTP_EXTERNAL_URI=http://EnterURIHere:9000/ # You can change the IP-address to 127.0.0.1 if you want to run it locally or an external IP-address if you want to run it on a server.
 
