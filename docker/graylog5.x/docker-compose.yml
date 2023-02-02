@@ -39,7 +39,7 @@ services:
       GRAYLOG_PASSWORD_SECRET: ${GRAYLOG_PASSWORD_SECRET} # You can generate a password using `pwgen -N 1 -s 96`
       GRAYLOG_ROOT_PASSWORD_SHA2: ${GRAYLOG_ROOT_PASSWORD_SHA2} # You can generate the SHA256-hash of your password with `echo -n <password> | sha256sum`
       GRAYLOG_HTTP_BIND_ADDRESS: "0.0.0.0:9000"
-      GRAYLOG_HTTP_EXTERNAL_URI: "http://your-ip:9000/" # You can change the IP-address to 127.0.0.1 if you want to run it locally, and any external IP-address if you want to run it on a server.
+      GRAYLOG_HTTP_EXTERNAL_URI: ${GRAYLOG_HTTP_EXTERNAL_URI} # You can change the IP-address to 127.0.0.1 if you want to run it locally, and any external IP-address if you want to run it on a server.
       GRAYLOG_ELASTICSEARCH_HOSTS: "http://opensearch:9200"
       GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
     ports:
