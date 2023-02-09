@@ -96,9 +96,9 @@ We're making use of an Ubuntu Minimal 22.04 instance running on a hypervisor.
 
 ## Docker Compose
 
-In this repository we already have created a `docker-compose.yml`. See <https://github.com/AnonymousWP/Grayhive/blob/master/docker/docker-compose.yml> in case you didn't create one yet.
+In this repository we already have created a `docker-compose.yml`. See [here](/docker/graylog5.x/docker-compose.yml) or [here](./docker/graylog4.x/docker-compose.yml) in case you didn't create one yet.
 
-**NOTE**: don't forget to change the values in `docker-compose.yml` and its corresponding `.env` file. Click [here](./docker/graylog5.x/.env) or [here](./docker/graylog5.x/.env) for the `.env` file.
+**NOTE**: don't forget to change the values in `docker-compose.yml` and its corresponding `.env` file. Click [here](./docker/graylog5.x/.env) or [here](./docker/graylog4.x/.env) for the `.env` file.
 
 1. Verify you have Docker Compose installed
 
@@ -148,7 +148,7 @@ In this repository we already have created a `docker-compose.yml`. See <https://
 
 ### Cleaning up
 
-1. In case you want to start all over again regarding containers (e.g. for testing purposes), you can use <https://github.com/AnonymousWP/Grayhive/blob/master/docker/clean_start.sh>, which stops the containers, then deletes them, including the images and volumes.
+1. In case you want to start all over again regarding containers (e.g. for testing purposes), you can use [this script](/docker/clean_start.sh), which stops the containers, then deletes them, including the images and volumes.
 
 ## The Hive
 
