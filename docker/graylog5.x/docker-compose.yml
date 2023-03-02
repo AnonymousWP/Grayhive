@@ -10,7 +10,7 @@ services:
     restart: "on-failure"
 
   opensearch:
-    image: "opensearchproject/opensearch:2.5.0"
+    image: "opensearchproject/opensearch:2.6.0"
     volumes: # Stores OpenSearch data in this directory/path. Comes in handy when updating OpenSearch, so that data is retained.
       - os_data:/usr/share/opensearch/data
     environment:
