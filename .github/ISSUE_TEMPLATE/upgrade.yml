@@ -1,7 +1,7 @@
-name: Upgrade software
+name: Update software
 description: Select a software package
-title: "[Upgrade]: "
-labels: ["upgrade"]
+title: "[Update]: "
+labels: ["Update"]
 assignees:
   - AnonymousWP
 body:
