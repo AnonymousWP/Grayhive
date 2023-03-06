@@ -22,6 +22,8 @@ body:
     id: version
     attributes:
       label: Enter the new version of the software package and a link to the changelog
-      placeholder: 5.0.5. Changelog https://go2docs.graylog.org/5-0/changelogs/changelog.html#Graylog505
+      value: |
+      Version: 
+      Link to changelog: 
     validations:
       required: true
