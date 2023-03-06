@@ -1,7 +1,7 @@
 name: Update software
 description: Select a software package
 title: "[Update]: "
-labels: ["Update"]
+labels: ["update"]
 assignees:
   - AnonymousWP
 body:
