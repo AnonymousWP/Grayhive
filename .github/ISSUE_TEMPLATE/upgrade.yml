@@ -6,7 +6,7 @@ assignees:
   - AnonymousWP
 body:
   - type: dropdown
-    id: Software package
+    id: Software-package
     attributes:
       label: Select the software you want to update
       multiple: false
