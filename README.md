@@ -152,22 +152,9 @@ In this repository we already have created a `docker-compose.yml`. See <https://
 
 The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSec/graylog2thehive). They have also written [a blog](https://blog.reconinfosec.com/integrating-graylog-with-thehive/) about it. Credits to them for making these scripts.
 
-**NOTE:** following/executing the next steps assume that the script is already on the server. It's also recommended to execute the steps as sudo'er.
-
-1. It's important that the server can only send alerts via port 5000; not receive. Thus we'll block/drop incoming traffic on port 5000.
-
-    ```shell
-    sudo iptables -A INPUT -p tcp --destination-port 5000 -j DROP
-    sudo iptables-save
-    ```
+**NOTE:** following/executing the next steps assume that the Dockerfile is already on the server. It's also recommended to execute the steps as sudo'er.
 
 1. Configure SSL certificate paths in `app.py`, or comment out all context lines if not using SSL
-
-1. Copy `init.d/graylog2thehive.service` to `/etc/systemd/system/graylog2thehive.service`:
-
-    ```shell
-    sudo cp init.d/graylog2thehive.service /etc/systemd/system/graylog2thehive.service
-    ```
 
 1. Set your Hive API key in `/etc/systemd/system/graylog2thehive.service` for the `HIVE_SECRET_KEY`
 
@@ -175,17 +162,7 @@ The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSe
 
 1. **Optional:** `app/__init__.py`, configure any other IP, hash, URL, or filename fields in place of src_ip and dst_ip to include them as artifacts/observables in your alert
 
-1. Install pip:
-
-    ```shell
-    sudo apt install pip
-    ```
-
-1. Install requirements:
-
-    ```shell
-    sudo pip install -r requirements.txt
-    ```
+1. Run the [Dockerfile](./graylog2thehive/Dockerfile): `docker build -t graylog2thehive .`
 
 1. Runs at <https://0.0.0.0:5000>, accepts POST requests
 
@@ -195,18 +172,11 @@ The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSe
     sudo docker inspect <containerID>
     ```
 
-1. Create a log file and change ownership
+1. Run the Docker container with the image you just built: `docker run -dp 3000:3000 graylog2thehive`
 
-    ```shell
-    sudo nano /var/log/graylog2thehive.log
-    sudo chown test-user:test-user graylog2thehive.log
-    ```
+1. Check whether it runs correctly or not: `docker ps -a`
 
-1. Start and enable the service:
-
-    ```shell
-    sudo systemctl enable graylog2thehive && sudo systemctl start graylog2thehive
-    ```
+    - If not, run `docker logs <containerID>`
 
 ## Terraform modules
 
