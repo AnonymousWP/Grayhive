@@ -1,4 +1,3 @@
 thehive4py
 requests
-logging
 flask
