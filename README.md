@@ -172,7 +172,7 @@ The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSe
     sudo docker inspect <containerID>
     ```
 
-1. Run the Docker container with the image you just built: `docker run -dp 3000:3000 graylog2thehive`
+1. Run the Docker container with the image you just built: `docker run -dp 5000:5000 graylog2thehive`
 
 1. Check whether it runs correctly or not: `docker ps -a`
 
