@@ -158,9 +158,7 @@ The Python scripts used come from [Recon InfoSec](https://github.com/ReconInfoSe
 
 1. Configure SSL certificate paths in `app.py`, or comment out all context lines if not using SSL
 
-1. Set your Hive API key in `/etc/systemd/system/graylog2thehive.service` for the `HIVE_SECRET_KEY`
-
-1. Set your Hive and Graylog URLs in `config.py`
+1. Set your values like API key, Hive URL and Graylog URL in [the .env file](./graylog2thehive/.env)
 
 1. **Optional:** `app/__init__.py`, configure any other IP, hash, URL, or filename fields in place of src_ip and dst_ip to include them as artifacts/observables in your alert
 
