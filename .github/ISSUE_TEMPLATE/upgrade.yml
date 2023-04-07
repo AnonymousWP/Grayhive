@@ -24,7 +24,7 @@ body:
       label: Enter the new version of the software package and a link to the changelog
       render: 
       value: |
-        Version: 
-        Link to changelog: 
+        - Version: 
+        - Link to changelog: 
     validations:
       required: true
