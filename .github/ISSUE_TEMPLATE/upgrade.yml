@@ -8,7 +8,7 @@ body:
   - type: dropdown
     id: Software-package
     attributes:
-      label: Select the software you want to update
+      label: Software selection
       multiple: false
       options:
         - Graylog
@@ -21,8 +21,8 @@ body:
   - type: textarea
     id: version
     attributes:
-      label: Enter the new version of the software package and a link to the changelog
-      render: 
+      label: Version and changelog
+      render: markdown
       value: |
         - Version: 
         - Link to changelog: 
