@@ -148,7 +148,7 @@ In this repository we already have created a `docker-compose.yml`. See [here](/d
 
 ### Cleaning up
 
-1. In case you want to start all over again regarding containers (e.g. for testing purposes), you can use [this script](/docker/clean_start.sh), which stops the containers, then deletes them, including the images and volumes.
+1. In case you want to start all over again regarding containers (e.g. for testing purposes), you can use [this script](/docker/graylog5.x/clean_start.sh), which stops the containers, then deletes them, including the images, networks and volumes.
 
 ## The Hive
 
