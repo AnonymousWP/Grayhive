@@ -1,7 +1,6 @@
 #!/bin/bash
 
-bold=$(tput bold)
-normal=$(tput sgr0)
+# In case executing this script doesn't work, allow it to execute: `sudo chmod +x ./clean_start.sh`
 
 # Remove containers related to the Docker Compose file
 docker compose down --rmi all
@@ -21,4 +20,4 @@ for image in $(docker images | grep 'graylog\|mongo\|opensearchproject' | awk '{
   docker rmi -f $image
 done
 
-echo "${bold}All Docker resources related to the Docker Compose file have been removed.${normal}"
+echo -e "\033[1mAll Docker resources related to the Docker Compose file have been removed.\033[0m"
