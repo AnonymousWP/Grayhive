@@ -1,6 +1,6 @@
 name: Update software
 description: Select a software package
-title: "[Update]: "
+title: "update(scope): "
 labels: ["update"]
 assignees:
   - AnonymousWP
